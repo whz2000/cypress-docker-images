@@ -30,6 +30,8 @@ ENV DBUS_SESSION_BUS_ADDRESS=/dev/null \
 # TODO: there are other folders that need permissions but I don't know what they are yet, See: https://github.com/cypress-io/cypress/issues/23962
 RUN ls -la /root \
   && chmod 777 /root \
+  && sed -i 's|http://deb.debian.org/debian/|https://mirrors.tuna.tsinghua.edu.cn/debian/|g' /etc/apt/sources.list \
+  && sed -i 's|http://security.debian.org/|https://mirrors.tuna.tsinghua.edu.cn/debian-security/|g' /etc/apt/sources.list \
   && apt-get update \
   && apt-get install --no-install-recommends -y \
     # Always install: Needed to run Cypress
